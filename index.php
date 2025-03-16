@@ -12,6 +12,7 @@ require_once __DIR__ . '/controllers/AlmacenController.php';
 require_once __DIR__ . '/controllers/LogoutController.php';
 require_once __DIR__ . '/controllers/ControladorEmpleado.php';
 require_once __DIR__ . '/controllers/ControladorUsuario.php';
+require_once __DIR__ . '/controllers/ControladorMesa.php';
 
 // Otros controladores
 
@@ -80,6 +81,38 @@ switch ($uri) {
             $controller->registrar();
         } else {
             require_once __DIR__ . '/views/registrarUsuario.php';
+        }
+        break;
+
+    // Nueva ruta para listar usuarios
+    case '/NuevaPolleria/listarUsuariosEliminar':
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $controller = new ControladorUsuario();
+            $controller->listarParaEliminar();
+        } else {
+            require_once __DIR__ . '../views/listarUsuariosEliminar.php';
+        }
+        break;
+
+    // Nueva ruta para eliminar usuario
+    case '/NuevaPolleria/eliminarUsuario':
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $controller = new ControladorUsuario();
+            $controller->eliminar();
+        }
+        break;
+
+    // Nueva ruta para gestionar mesas
+    case '/NuevaPolleria/gestionarMesas':
+        $controller = new ControladorMesa();
+        $controller->gestionar();
+        break;
+
+    // Nueva ruta para actualizar mesas
+    case '/NuevaPolleria/actualizarMesas':
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $controller = new ControladorMesa();
+            $controller->actualizar();
         }
         break;
 

@@ -7,25 +7,24 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script>
         function redirigirMenu() {
-    var cartaSeleccionada = document.getElementById('carta').value;
-    var numeroMesa = document.getElementById('mesa').value;
-    
-    // Guardar número de mesa en localStorage
-    if (numeroMesa) {
-        localStorage.setItem('numeroMesa', numeroMesa);
-    }
-    
-    // Limpiar selecciones anteriores
-    localStorage.removeItem('platosSeleccionados');
-    localStorage.removeItem('bebidasSeleccionadas');
-    
-    if (cartaSeleccionada === 'platillos') {
-        window.location.href = 'menu_platillos.php';
-    } else if (cartaSeleccionada === 'bebidas') {
-        window.location.href = 'menu_bebidas.php';
-    }
-}
-        
+            var cartaSeleccionada = document.getElementById('carta').value;
+            var numeroMesa = document.getElementById('mesa').value;
+            
+            // Guardar número de mesa en localStorage
+            if (numeroMesa) {
+                localStorage.setItem('numeroMesa', numeroMesa);
+            }
+            
+            // Limpiar selecciones anteriores
+            localStorage.removeItem('platosSeleccionados');
+            localStorage.removeItem('bebidasSeleccionadas');
+            
+            if (cartaSeleccionada === 'platillos') {
+                window.location.href = 'menu_platillos.php';
+            } else if (cartaSeleccionada === 'bebidas') {
+                window.location.href = 'menu_bebidas.php';
+            }
+        }
     </script>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
