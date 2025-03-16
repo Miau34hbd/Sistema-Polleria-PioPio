@@ -139,13 +139,13 @@
 <div class="sidebar">
     <h2>Menú</h2>
     <div class="nav-item">
-    <a href="registrarUsuario.php">Registra Usuarios</a>
+    <a href="views/registrarEmpleado.php">Registra Usuarios</a>
 
 
     </div>
     
     <div class="nav-item">
-        <a href="lista_pedidos.php">Ver Lista de usuarios</a>
+        <a href="views/registarUsuario.php">Crear Uusario</a>
     </div>
 
 
