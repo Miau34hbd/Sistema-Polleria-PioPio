@@ -18,10 +18,31 @@ class Usuario {
         return $resultado->fetch_assoc();
     }
 
-    public function registrarUsuario($id_empleado, $correo, $contraseña) {
+    public function registrarUsuario($id_empleado, $correo, $contraseña, $rol) {
         $conexion = $this->db->getConexion();
-        $stmt = $conexion->prepare("INSERT INTO usuarios (id_empleado, correo, contraseña) VALUES (?, ?, ?)");
-        $stmt->bind_param("iss", $id_empleado, $correo, $contraseña);
+        $stmt = $conexion->prepare("INSERT INTO usuarios (id_empleado, correo, contraseña, rol) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isss", $id_empleado, $correo, $contraseña, $rol);
+        return $stmt->execute();
+    }
+
+    public function obtenerUsuarios() {
+        $conexion = $this->db->getConexion();
+        $result = $conexion->query("SELECT u.id_usuario, e.id_empleado, p.nombre, p.apellido, u.correo, e.rol FROM usuarios u JOIN empleados e ON u.id_empleado = e.id_empleado JOIN persona p ON e.id_persona = p.id_persona");
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Método para obtener todos los usuarios
+    public function obtenerTodos() {
+        $conexion = $this->db->getConexion();
+        $resultado = $conexion->query("SELECT * FROM usuarios");
+        return $resultado->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Método para eliminar usuario
+    public function eliminarUsuario($id) {
+        $conexion = $this->db->getConexion();
+        $stmt = $conexion->prepare("DELETE FROM usuarios WHERE id = ?");
+        $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
 }
