@@ -29,31 +29,16 @@ class ControladorUsuario {
             }
         }
     }
-
-    // Método para listar usuarios con opción de eliminar
     public function listarParaEliminar() {
         $usuario = new Usuario();
         $usuarios = $usuario->obtenerTodos();
+    
+        // Depuración
+        echo "<!-- Depuración: ".print_r($usuarios, true)." -->";
+        
+        // Continuar con la vista
         include __DIR__ . '/../views/listarUsuariosEliminar.php';
     }
-
-    // Método para eliminar usuario
-    public function eliminar() {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id = $_POST['id'];
-
-            $usuario = new Usuario();
-            $resultado = $usuario->eliminarUsuario($id);
-
-            if ($resultado) {
-                echo "Usuario eliminado exitosamente.";
-            } else {
-                echo "Error al eliminar el usuario.";
-            }
-
-            // Redirigir a la lista de usuarios después de la eliminación
-            header('Location: /controladorUsuario/listarParaEliminar');
-        }
-    }
+   
 }
 ?>
