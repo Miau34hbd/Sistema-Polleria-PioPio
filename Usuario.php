@@ -18,13 +18,12 @@ class Usuario {
         return $resultado->fetch_assoc();
     }
 
-    public function registrarUsuario($id_empleado, $correo, $contraseña) {
+    public function registrarUsuario($id_empleado, $correo, $contraseña, $rol) {
         $conexion = $this->db->getConexion();
-        $stmt = $conexion->prepare("INSERT INTO usuarios (id_empleado, correo, contraseña) VALUES (?, ?, ?)");
-        $stmt->bind_param("iss", $id_empleado, $correo, $contraseña);
+        $stmt = $conexion->prepare("INSERT INTO usuarios (id_empleado, correo, contraseña, rol) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("isss", $id_empleado, $correo, $contraseña, $rol);
         return $stmt->execute();
     }
-
     public function obtenerTodos() {
         $conexion = $this->db->getConexion();
         $resultado = $conexion->query("SELECT id_usuario, correo FROM usuarios");
