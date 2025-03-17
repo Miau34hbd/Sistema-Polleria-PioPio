@@ -25,7 +25,7 @@ $conexion = $controller->getConexion();
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: black;
+            color: #0C080D;
             text-decoration: none;
         }
 
@@ -36,11 +36,12 @@ $conexion = $controller->getConexion();
         }
 
         .bebida-card {
-            background-color: #f9f9f9;
+            background-color: #F2B705;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 16px;
             text-align: center;
+            color: #0C080D;
         }
 
         .bebida-card img {
@@ -59,8 +60,26 @@ $conexion = $controller->getConexion();
         .bebida-card p {
             font-size: 1.25rem;
             font-weight: bold;
-            color: green;
+            color: #D98E04;
             margin-bottom: 12px;
+        }
+
+        .bg-primary {
+            background-color: #D97904;
+        }
+
+        .text-secondary {
+            color: #A64F03;
+        }
+
+        .btn-primary {
+            background-color: #D97904;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #A64F03;
+            color: white;
         }
     </style>
 
@@ -87,9 +106,9 @@ $conexion = $controller->getConexion();
         }
     </script>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center py-8">
+<body class="bg-white min-h-screen flex flex-col items-center py-8">
 
-    <header class="w-full bg-indigo-600 text-white p-4 shadow-md">
+    <header class="w-full bg-primary text-white p-4 shadow-md">
         <h1 class="text-center text-2xl font-semibold">Carta de Bebidas</h1>
     </header>
 
@@ -98,27 +117,27 @@ $conexion = $controller->getConexion();
         <div class="icon-menu">
             <a href="?tipo_bebida=" id="all">
                 <img src="../icons/todos.png" alt="Todos">
-                <span>TODOS</span>
+                <span class="text-secondary">TODOS</span>
             </a>
             <a href="?tipo_bebida=Café" id="Café">
                 <img src="../icons/Café.png" alt="Café">
-                <span>Café</span>
+                <span class="text-secondary">Café</span>
             </a>
             <a href="?tipo_bebida=Cerveza" id="Cerveza">
                 <img src="../icons/Cerveza.png" alt="Cerveza">
-                <span>Cerveza</span>
+                <span class="text-secondary">Cerveza</span>
             </a>
             <a href="?tipo_bebida=Jugo" id="Jugo">
                 <img src="../icons/Jugo.png" alt="Jugo">
-                <span>Jugo</span>
+                <span class="text-secondary">Jugo</span>
             </a>
             <a href="?tipo_bebida=Refresco" id="Refresco">
                 <img src="../icons/Refresco.png" alt="Refresco">
-                <span>Refresco</span>
+                <span class="text-secondary">Refresco</span>
             </a>
             <a href="?tipo_bebida=Trago" id="Trago">
                 <img src="../icons/Trago.png" alt="Trago">
-                <span>Trago</span>
+                <span class="text-secondary">Trago</span>
             </a>
         </div>
 
@@ -132,8 +151,8 @@ $conexion = $controller->getConexion();
                         <div class="bebida-card">
                             <img src="<?php echo $imagen_ruta; ?>" alt="<?php echo htmlspecialchars($fila['Nombre']); ?>">
                             <h2 class="text-lg font-bold my-2"><?php echo htmlspecialchars($fila['Nombre']); ?></h2>
-                            <p class="text-blue-600 font-semibold mb-4">S/ <?php echo htmlspecialchars($fila['precio']); ?></p>
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg w-full" 
+                            <p class="mb-4">S/ <?php echo htmlspecialchars($fila['precio']); ?></p>
+                            <button class="btn-primary py-2 px-4 rounded-lg w-full" 
                                     onclick="seleccionarBebida('<?php echo htmlspecialchars($fila['id_bebida']); ?>', '<?php echo htmlspecialchars($fila['Nombre']); ?>', '<?php echo htmlspecialchars($fila['precio']); ?>')">
                                 Seleccionar
                             </button>
@@ -145,13 +164,12 @@ $conexion = $controller->getConexion();
             </div>
         </section>
 
-        <div class="mt-6 flex justify-between w-full max-w-sm mx-auto">
-            <a href="crearpedido.php" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Volver</a>
-            <a href="segundocrear.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Ver Pedido</a>
+        <div class="mt-6 flex justify-center w-full max-w-sm mx-auto">
+            <a href="segundocrear.php" class="btn-secondary py-2 px-4 rounded-lg">Ver Pedido</a>
         </div>
     </main>
 
-    <footer class="bg-indigo-600 text-white p-4 mt-auto">
+    <footer class="bg-primary text-white p-4 mt-auto">
         <p class="text-center">Pollería &copy; 2024</p>
     </footer>
 

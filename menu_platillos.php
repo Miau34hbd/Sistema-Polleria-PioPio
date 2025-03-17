@@ -25,7 +25,7 @@ $platos = $controller->mostrarPlatos();
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: #333;
+            color: #0C080D;
             transition: transform 0.2s;
         }
         
@@ -53,6 +53,8 @@ $platos = $controller->mostrarPlatos();
             flex-direction: column;
             align-items: center;
             transition: transform 0.2s;
+            background-color: #F2B705;
+            color: #0C080D;
         }
         
         .plato-card:hover {
@@ -66,6 +68,24 @@ $platos = $controller->mostrarPlatos();
             object-fit: cover;
             border-radius: 6px;
             margin-bottom: 12px;
+        }
+        
+        .bg-primary {
+            background-color: #D97904;
+        }
+
+        .text-secondary {
+            color: #A64F03;
+        }
+
+        .btn-primary {
+            background-color: #D97904;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #A64F03;
+            color: white;
         }
     </style>
     <script>
@@ -90,8 +110,8 @@ $platos = $controller->mostrarPlatos();
         }
     </script>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center py-8">
-    <header class="w-full bg-indigo-600 text-white p-4 shadow-md">
+<body class="bg-white min-h-screen flex flex-col items-center py-8">
+    <header class="w-full bg-primary text-white p-4 shadow-md">
         <h1 class="text-center text-2xl font-semibold">Carta de Platillos</h1>
     </header>
 
@@ -100,31 +120,31 @@ $platos = $controller->mostrarPlatos();
         <div class="icon-menu">
             <a href="?tipo_plato=" id="all">
                 <img src="../icons/todos.png" alt="Todos">
-                <span>TODOS</span>
+                <span class="text-secondary">TODOS</span>
             </a>
             <a href="?tipo_plato=Brasas" id="brasas">
                 <img src="../icons/brasas.png" alt="Brasas">
-                <span>BRASAS</span>
+                <span class="text-secondary">BRASAS</span>
             </a>
             <a href="?tipo_plato=Parrillas" id="parrillas">
                 <img src="../icons/parilla.png" alt="Parrillas">
-                <span>PARRILLAS</span>
+                <span class="text-secondary">PARRILLAS</span>
             </a>
             <a href="?tipo_plato=Fusión Criolla" id="fusion">
                 <img src="../icons/criolla.png" alt="Fusión Criolla">
-                <span>FUSIÓN CRIOLLA</span>
+                <span class="text-secondary">FUSIÓN CRIOLLA</span>
             </a>
             <a href="?tipo_plato=Hamburguesas" id="hamburguesas">
                 <img src="../icons/hambu.png" alt="Hamburguesas">
-                <span>HAMBURGUESAS</span>       
+                <span class="text-secondary">HAMBURGUESAS</span>       
             </a>
             <a href="?tipo_plato=Piqueos" id="piqueos">
                 <img src="../icons/acompañantes.png" alt="Piqueos">
-                <span>PIQUEOS</span>
+                <span class="text-secondary">PIQUEOS</span>
             </a>
             <a href="?tipo_plato=Acompañamientos" id="acompanamientos">
                 <img src="../icons/ax.png" alt="Acompañamientos">
-                <span>ACOMPAÑAMIENTOS</span>
+                <span class="text-secondary">ACOMPAÑAMIENTOS</span>
             </a>
         </div>
 
@@ -138,8 +158,8 @@ $platos = $controller->mostrarPlatos();
                         <div class="plato-card">
                             <img src="<?php echo $imagen_ruta; ?>" alt="<?php echo htmlspecialchars($fila['Nombre']); ?>">
                             <h2 class="text-lg font-bold my-2"><?php echo htmlspecialchars($fila['Nombre']); ?></h2>
-                            <p class="text-blue-600 font-semibold mb-4">S/ <?php echo htmlspecialchars($fila['precio']); ?></p>
-                            <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg w-full" 
+                            <p class="mb-4">S/ <?php echo htmlspecialchars($fila['precio']); ?></p>
+                            <button class="btn-primary py-2 px-4 rounded-lg w-full" 
                                     onclick="seleccionarPlato('<?php echo htmlspecialchars($fila['id_plato']); ?>', '<?php echo htmlspecialchars($fila['Nombre']); ?>', '<?php echo htmlspecialchars($fila['precio']); ?>')">
                                 Seleccionar
                             </button>
@@ -151,13 +171,12 @@ $platos = $controller->mostrarPlatos();
             </div>
         </section>
 
-        <div class="mt-6 flex justify-between w-full max-w-sm mx-auto">
-            <a href="crearpedido.php" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Volver</a>
-            <a href="segundocrear.php" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Ver Pedido</a>
+        <div class="mt-6 flex justify-center w-full max-w-sm mx-auto">
+            <a href="segundocrear.php" class="btn-secondary py-2 px-4 rounded-lg">Ver Pedido</a>
         </div>
     </main>
 
-    <footer class="bg-indigo-600 text-white p-4 mt-auto">
+    <footer class="bg-primary text-white p-4 mt-auto">
         <p class="text-center">Pollería &copy; 2024</p>
     </footer>
 </body>

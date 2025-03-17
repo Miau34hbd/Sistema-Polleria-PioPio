@@ -139,22 +139,22 @@
 <div class="sidebar">
     <h2>Menú</h2>
     <div class="nav-item">
-    <a href="views/registrarEmpleado.php">Registra Usuarios</a>
+    <a href="views/registrarEmpleado.php">Registra Empleados</a>
 
 
     </div>
     
     <div class="nav-item">
-        <a href="views/registarUsuario.php">Crear Uusario</a>
+        <a href="views/registrarUsuario.php">Crear Usuario</a>
     </div>
 
 
     <div class="nav-item">
-        <a href="/NuevaPolleria/logout">Revisar Solicitudes</a>
+        <a href="views/listarUsuariosEliminar.php">Eliminar usuarios</a>
     </div>
 
     <div class="nav-item">
-        <a href="/NuevaPolleria/logout">Gestion de Mesas</a>
+        <a href="views/gestionarMesas.php">Gestion de Mesas</a>
     </div>
 
 

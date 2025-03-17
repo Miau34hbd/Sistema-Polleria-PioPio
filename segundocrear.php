@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resumen del Pedido</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .bg-primary {
+            background-color: #D97904;
+        }
+
+        .text-primary {
+            color: #0C080D;
+        }
+
+        .text-secondary {
+            color: #A64F03;
+        }
+
+        .btn-primary {
+            background-color: #D97904;
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: #A64F03;
+            color: white;
+        }
+
+        .bg-container {
+            background-color: #F2B705;
+        }
+
+        .text-container {
+            color: #0C080D;
+        }
+    </style>
     <script>
         function guardarPedido() {
             // Obtener datos del pedido
@@ -59,32 +90,53 @@
             localStorage.removeItem('bebidasSeleccionadas');
             window.location.href = 'crearpedido.php';
         }
+
+        function modificarCantidad(tipo, indice) {
+            var cantidad = prompt("Ingrese la nueva cantidad:");
+            if (cantidad == null || cantidad == "" || isNaN(cantidad) || cantidad <= 0) {
+                alert("Cantidad inválida.");
+                return;
+            }
+
+            if (tipo === 'plato') {
+                var platosSeleccionados = JSON.parse(localStorage.getItem('platosSeleccionados'));
+                platosSeleccionados[indice].cantidad = parseInt(cantidad);
+                localStorage.setItem('platosSeleccionados', JSON.stringify(platosSeleccionados));
+            } else if (tipo === 'bebida') {
+                var bebidasSeleccionadas = JSON.parse(localStorage.getItem('bebidasSeleccionadas'));
+                bebidasSeleccionadas[indice].cantidad = parseInt(cantidad);
+                localStorage.setItem('bebidasSeleccionadas', JSON.stringify(bebidasSeleccionadas));
+            }
+
+            // Recargar la página para reflejar los cambios
+            location.reload();
+        }
     </script>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col items-center py-8">
-    <header class="w-full bg-indigo-600 text-white p-4 shadow-md">
+<body class="bg-white min-h-screen flex flex-col items-center py-8">
+    <header class="w-full bg-primary text-white p-4 shadow-md">
         <h1 class="text-center text-2xl font-semibold">Resumen del Pedido</h1>
     </header>
 
     <main class="container mx-auto px-4 py-6">
-        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-3xl">
-            <h2 class="text-xl font-semibold mb-4">Mesa: <span id="numeroMesa"></span></h2>
+        <div class="bg-container p-6 rounded-lg shadow-lg w-full max-w-3xl">
+            <h2 class="text-xl font-semibold mb-4">Mesa: <span id="numeroMesa" class="text-primary"></span></h2>
             <h3 class="text-lg font-semibold mb-2">Platos Seleccionados:</h3>
             <ul id="listaPlatos" class="mb-4"></ul>
             <h3 class="text-lg font-semibold mb-2">Bebidas Seleccionadas:</h3>
             <ul id="listaBebidas" class="mb-4"></ul>
-            <h3 class="text-lg font-semibold mb-2">Total: S/ <span id="totalPedido"></span></h3>
+            <h3 class="text-lg font-semibold mb-2">Total: S/ <span id="totalPedido" class="text-primary"></span></h3>
 
             <div class="flex justify-between">
-                <button onclick="window.location.href='menu_platillos.php?return=segundocrear.php'" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Agregar Platillo</button>
-                <button onclick="window.location.href='menu_bebidas.php?return=segundocrear.php'" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Agregar Bebida</button>
-                <button onclick="guardarPedido()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Guardar</button>
-                <button onclick="cancelarPedido()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Cancelar</button>
+                <button onclick="window.location.href='menu_platillos.php?return=segundocrear.php'" class="btn-primary hover:bg-secondary text-white py-2 px-4 rounded-lg">Agregar Platillo</button>
+                <button onclick="window.location.href='menu_bebidas.php?return=segundocrear.php'" class="btn-primary hover:bg-secondary text-white py-2 px-4 rounded-lg">Agregar Bebida</button>
+                <button onclick="guardarPedido()" class="btn-primary hover:bg-secondary text-white py-2 px-4 rounded-lg">Guardar</button>
+                <button onclick="cancelarPedido()" class="btn-secondary hover:bg-secondary text-white py-2 px-4 rounded-lg">Cancelar</button>
             </div>
         </div>
     </main>
 
-    <footer class="bg-indigo-600 text-white p-4 mt-auto">
+    <footer class="bg-primary text-white p-4 mt-auto">
         <p class="text-center">Pollería &copy; 2024</p>
     </footer>
 
@@ -97,9 +149,9 @@
             var platosSeleccionados = JSON.parse(localStorage.getItem('platosSeleccionados')) || [];
             var listaPlatos = document.getElementById('listaPlatos');
             var totalPlatos = 0;
-            platosSeleccionados.forEach(plato => {
+            platosSeleccionados.forEach((plato, index) => {
                 var li = document.createElement('li');
-                li.innerText = `${plato.nombre} - S/ ${plato.precio} x ${plato.cantidad}`;
+                li.innerHTML = `${plato.nombre} - S/ ${plato.precio} x ${plato.cantidad} <button onclick="modificarCantidad('plato', ${index})" class="btn-secondary hover:bg-secondary text-white py-1 px-2 rounded-lg ml-2">Modificar Cantidad</button>`;
                 listaPlatos.appendChild(li);
                 totalPlatos += plato.precio * plato.cantidad;
             });
@@ -108,9 +160,9 @@
             var bebidasSeleccionadas = JSON.parse(localStorage.getItem('bebidasSeleccionadas')) || [];
             var listaBebidas = document.getElementById('listaBebidas');
             var totalBebidas = 0;
-            bebidasSeleccionadas.forEach(bebida => {
+            bebidasSeleccionadas.forEach((bebida, index) => {
                 var li = document.createElement('li');
-                li.innerText = `${bebida.nombre} - S/ ${bebida.precio} x ${bebida.cantidad}`;
+                li.innerHTML = `${bebida.nombre} - S/ ${bebida.precio} x ${bebida.cantidad} <button onclick="modificarCantidad('bebida', ${index})" class="btn-secondary hover:bg-secondary text-white py-1 px-2 rounded-lg ml-2">Modificar Cantidad</button>`;
                 listaBebidas.appendChild(li);
                 totalBebidas += bebida.precio * bebida.cantidad;
             });

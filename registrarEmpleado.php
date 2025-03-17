@@ -36,6 +36,10 @@
             border-radius: 8px;
             border: 1px solid #D98E04;
         }
+        .form-container .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
         .form-container button {
             background-color: #D98E04;
             color: white;
@@ -43,7 +47,7 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            width: 100%;
+            width: 48%;
         }
         .form-container button:hover {
             background-color: #A64F03;
@@ -53,7 +57,7 @@
 <body>
     <div class="form-container">
         <h2>Registrar Empleado</h2>
-        <form action="../controllers/ControladorEmpleado" method="post">
+        <form id="registrarEmpleadoForm">
             <input type="text" name="dni" placeholder="DNI" required>
             <input type="text" name="nombre" placeholder="Nombre" required>
             <input type="text" name="apellido" placeholder="Apellido" required>
@@ -67,8 +71,31 @@
                 <option value="Mesero">Mesero</option>
                 <option value="JefeCocina">Jefe de Cocina</option>
             </select>
-            <button type="submit">Registrar</button>
+            <div class="button-container">
+                <button type="submit">Registrar</button>
+                
+            </div>
         </form>
     </div>
+    <script>
+        document.getElementById('registrarEmpleadoForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+
+            const formData = new FormData(this);
+
+            fetch('/NuevaPolleria/registrarEmpleado', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // Mostrar mensaje emergente
+                if (data.success) {
+                    window.location.href = '/NuevaPolleria/admin'; // Redirigir al menú del administrador si el registro fue exitoso
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
 </body>
 </html>

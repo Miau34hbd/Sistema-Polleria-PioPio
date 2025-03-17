@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel del Cajero</title>
+    <title>Panel del Mesero</title>
     <style>
     body {
         font-family: 'Montserrat', sans-serif;
@@ -110,23 +110,23 @@
 <body>
 
 <header>
-    <h1>Panel del Cajero</h1>
+    <h1>Panel del Mesero</h1>
     <div class="content-header">
         <p>Bienvenido</p>
     </div>
     <div class="status-panel">
         <div class="status-box">
        
-                    <h3>Revisar el fondo de caja antes de iniciar.</h3>
+                    <h3>Revisar que las mesas estén limpias y ordenadas</h3>
                     
 
         </div>
         <div class="status-box">
-        <h3>Verificar que los billetes sean auténticos</h3>
+        <h3>Tomar las órdenes con atención y repetirlas para confirmar</h3>
         </div>
 
         <div class="status-box">
-           <h3>Mantén siempre una actitud amable con los clientes.</h3>
+           <h3>Mantener una actitud amable y profesional en todo momento</h3>
         </div>
 
 
@@ -139,14 +139,16 @@
 <div class="sidebar">
     <h2>Menú</h2>
     <div class="nav-item">
-        <a href="views/Cajeroabrir.php">Abrir Caja</a>
+    <a href="views/crearpedido.php">Crear Pedido</a>
+
+
     </div>
+    
     <div class="nav-item">
-        <a href="views/CerraCaja.php">Cerrar Caja</a>
+        <a href="views/lista_pedidos.php">Consultar Lista de Pedidos</a>
     </div>
-    <div class="nav-item">
-        <a href="views/Cobrarcuenta.php">Cobrar Cuenta</a>
-    </div>
+
+
     <div class="nav-item">
         <a href="/NuevaPolleria/logout">Cerrar Sesión</a>
     </div>
